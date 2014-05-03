@@ -1,4 +1,4 @@
-from google.appengine.api import xmpp
+import webapp2
 import sublime, sublime_plugin
 
 class ExampleCommand(sublime_plugin.TextCommand):
