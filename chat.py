@@ -5,9 +5,13 @@ class ChatCommand(sublime_plugin.TextCommand):
 	active_users = {}
 	def run(self, edit):
 		self.refresh(edit)
-		#self.show_input_panel_with_readline(sublime.active_window().active_view(), edit)
+
+
 		time.sleep(1)
 		self.refresh(edit)
+		i = 0
+
+		self.show_input_panel_with_readline(sublime.active_window().active_view(), edit)
 
 	def refresh(self, edit):
 		message = get_usermessage();
@@ -18,6 +22,7 @@ class ChatCommand(sublime_plugin.TextCommand):
 				view.set_read_only(True)
 				view.reciever = sender
 				self.active_users[sender] = view
+				view.set_scratch(True)
 			for dialogue in message[sender]:
 				self.display(edit, self.active_users[sender], dialogue)
 
@@ -27,20 +32,21 @@ class ChatCommand(sublime_plugin.TextCommand):
 		view.set_read_only(True)
 	
 	def show_input_panel_with_readline(self, view, edit):
-		global x
+		x = []
 		def helper(y):
-			x = y
-		x = ""
+			
+			if view.id() is sublime.active_window().active_view().id():
+				self.display_at_bottom(view, edit, y)
+				# send_message(user, y)
+			self.run(edit)
+			# self.show_input_panel_with_readline(sublime.active_window().active_view() , edit)
+			# print(type(str(y)))
 		sublime.active_window().show_input_panel("Your message:", "", helper, None, None)
-		if view == sublime.active_window().active_view():
-			display_at_bottom(view, edit, x)
-			send_message(user, x)
-		self.run(edit)
-		#self.show_input_panel_with_readline(sublime.active_window().active_view() , edit)
+		
 
-	def display_at_bottom(view,edit, x):
+	def display_at_bottom(self, view,edit, x):
 		view.set_read_only(False)
-		view.insert(edit, view.size(), x+"\n")
+		view.insert(edit, view.size(), "\nMe> "+x)
 		view.set_read_only(True)
 	
 lst = [0]
