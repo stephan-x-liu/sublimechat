@@ -19,3 +19,5 @@ class ExampleCommand(sublime_plugin.TextCommand):
 def func(x):
 	print(x)
 	return x
+while True:
+	x = 4
