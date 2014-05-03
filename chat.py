@@ -11,7 +11,6 @@ class ChatCommand(sublime_plugin.TextCommand):
 				view.reciever = sender
 				self.active_users[sender] = view
 			for dialogue in message[sender]:
-				print(dialogue)
 				self.display(edit, self.active_users[sender], dialogue)
 
 	def display(self, edit, view, message):
