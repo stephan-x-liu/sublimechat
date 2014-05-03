@@ -7,11 +7,12 @@ class ExampleCommand(sublime_plugin.TextCommand):
 		print(len(sublime.windows()))
 		for window in sublime.windows():
 			print([view.id() for view in window.views()])
+			print(dir(window))
 		window.show_input_panel("string", "text", func, None, None)
 		#sublime.active_window().new_file()
 		viewlist = sublime.active_window().views()
 		print(viewlist)
-		self.view.insert(edit, 0, "")
+		self.view.insert(edit, self.view.size(), "thing")
 		self.view.settings().set("name", "thing")
 		print(self.view.settings().get("name"))
 		print(self.view.settings().has("name"))
