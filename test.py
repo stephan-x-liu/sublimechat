@@ -12,8 +12,9 @@ r = api.rooms.show(549073)
 r.message("bitch fuck cunt ass")
 
 lst = r.history()
+prevdate = 0
 for message in lst:
-    print(unicode(message))
+    print(type(message.date))
 
 """import xmpp
 
