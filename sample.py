@@ -1,5 +1,5 @@
 import sublime, sublime_plugin
-
+	
 class ExampleCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		print(type(edit))
@@ -7,7 +7,7 @@ class ExampleCommand(sublime_plugin.TextCommand):
 		print(len(sublime.windows()))
 		for window in sublime.windows():
 			print([view.id() for view in window.views()])
-		window.show_input_panel("string", "text", func, None, None)
+		window.show_input_panel("string", "text", None, None, None)
 		#sublime.active_window().new_file()
 		viewlist = sublime.active_window().views()
 		print(viewlist)
